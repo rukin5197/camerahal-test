@@ -4408,9 +4408,10 @@ status_t QualcommCameraHardware::sendCommand(int32_t command, int32_t arg1,
     return BAD_VALUE;
 }
 
-extern "C" sp<CameraHardwareInterface> openCameraHardware()
+extern "C" sp<CameraHardwareInterface> openCameraHardware(int id)
 {
     LOGI("openCameraHardware: call createInstance");
+    HAL_currentCameraId = id;
     parameter_string_initialized = false;
     return QualcommCameraHardware::createInstance();
 }
