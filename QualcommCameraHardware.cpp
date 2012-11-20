@@ -292,7 +292,7 @@ static thumbnail_size_type thumbnail_sizes[] = {
 #define THUMBNAIL_SIZE_COUNT (sizeof(thumbnail_sizes)/sizeof(thumbnail_size_type))
 #define DEFAULT_THUMBNAIL_SETTING 4
 #define THUMBNAIL_WIDTH_STR "512"
-#define THUMBNAIL_HEIGHT_STR "384"
+#define THUMBNAIL_HEIGHT_STR "288"
 #define THUMBNAIL_SMALL_HEIGHT 144
 static camera_size_type jpeg_thumbnail_sizes[]  = {
     { 512, 288 },
