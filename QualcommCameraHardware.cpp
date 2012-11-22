@@ -348,7 +348,7 @@ static int kRecordBufferCount;
 static bool mVpeEnabled;
 
 static int HAL_numOfCameras = 0;
-static camera_info_t HAL_cameraInfo[MSM_MAX_CAMERA_SENSORS];
+static camera_info_t HAL_cameraInfo[MAX_SENSOR_NAME];
 static int HAL_currentCameraId = 0;
 
 namespace android {
@@ -7268,13 +7268,13 @@ void QualcommCameraHardware::encodeData() {
 
 void QualcommCameraHardware::getCameraInfo()
 {
-    struct msm_camera_info camInfo;
+    struct msm_camsensor_info camInfo;
     int i, ret;
 
     LOGV("%s E", __FUNCTION__);
     int camfd = open(MSM_CAMERA_CONTROL, O_RDWR);
     if (camfd >= 0) {
-        ret = ioctl(camfd, MSM_CAM_IOCTL_GET_CAMERA_INFO, &camInfo);
+        ret = ioctl(camfd, MSM_CAM_IOCTL_GET_SENSOR_INFO, &camInfo);
         close(camfd);
 
         if (ret < 0) {
@@ -7284,7 +7284,7 @@ void QualcommCameraHardware::getCameraInfo()
              return;
         }
 
-        for (i = 0; i < camInfo.num_cameras; ++i) {
+        for (i = 0; i < camInfo.max_sensor_num; ++i) {
              HAL_cameraInfo[i].camera_id = i + 1;
              HAL_cameraInfo[i].position = camInfo.is_internal_cam[i] == 1 ? FRONT_CAMERA : BACK_CAMERA;
              HAL_cameraInfo[i].sensor_mount_angle = camInfo.s_mount_angle[i];
