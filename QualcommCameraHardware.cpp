@@ -7284,7 +7284,7 @@ void QualcommCameraHardware::getCameraInfo()
              return;
         }
 
-        for (i = 0; i < camInfo.max_sensor_num; ++i) {
+        for (i = 0; i < camInfo.num_cameras; ++i) {
              HAL_cameraInfo[i].camera_id = i + 1;
              HAL_cameraInfo[i].position = camInfo.is_internal_cam[i] == 1 ? FRONT_CAMERA : BACK_CAMERA;
              HAL_cameraInfo[i].sensor_mount_angle = camInfo.s_mount_angle[i];
