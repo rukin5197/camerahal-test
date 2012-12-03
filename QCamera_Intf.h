@@ -1347,11 +1347,12 @@ int8_t send_camstats(camstats_type msg_type, void* data, int size);
 int8_t send_camstats_msg(camstats_type stats_type, camstats_msg* p_msg);
 int is_camstats_thread_running(void);
 
-struct cam_frame_start_parms {
-	unsigned int unknown;
-	struct msm_frame frame;
-	struct msm_frame video_frame;
-};
+/* cam frame*/
+typedef struct {
+  unsigned int unknown;
+  struct msm_frame frame;
+  struct msm_frame video_frame;
+} cam_frame_start_parms;
 
 int launch_camframe_thread(cam_frame_start_parms* parms);
 void release_camframe_thread(void);
