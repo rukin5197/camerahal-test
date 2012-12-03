@@ -33,7 +33,11 @@
 #include <time.h>
 
 #include <cutils/log.h>
+#ifdef INCLUDE_LIBCAMERA_SOURCES
 #include "Overlay.h"
+#else
+#include <ui/OverlayHtc.h>
+#endif
 #include <camera/CameraParameters.h>
 #include <hardware/camera.h>
 #include <binder/IMemory.h>
