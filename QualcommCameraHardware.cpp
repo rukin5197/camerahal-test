@@ -98,7 +98,7 @@ bool  (*LINK_jpeg_encoder_encode)(const cam_ctrl_dimension_t *dimen,
                                   const uint8_t *thumbnailbuf, int thumbnailfd,
                                   const uint8_t *snapshotbuf, int snapshotfd,
                                   common_crop_t *scaling_parms, exif_tags_info_t *exif_data,
-                                  int exif_table_numEntries, int jpegPadding);
+                                  int exif_table_numEntries);
 void (*LINK_camframe_terminate)(void);
 //for 720p
 // Function to add a video buffer to free Q
@@ -2642,8 +2642,7 @@ bool QualcommCameraHardware::native_jpeg_encode(void)
                                       thumbfd,
                                       (uint8_t *)mRawHeap->mHeap->base(),
                                       mRawHeap->mHeap->getHeapID(),
-                                      &mCrop, exif_data, exif_table_numEntries,
-                                      jpegPadding/2)) {
+                                      &mCrop, exif_data, exif_table_numEntries)) {
             LOGE("native_jpeg_encode: jpeg_encoder_encode failed.");
             return false;
         }
@@ -2653,8 +2652,7 @@ bool QualcommCameraHardware::native_jpeg_encode(void)
                                      thumbfd,
                                      (uint8_t *)mRawHeap->mHeap->base(),
                                      mRawHeap->mHeap->getHeapID(),
-                                     &mCrop, exif_data, exif_table_numEntries,
-                                     jpegPadding/2)) {
+                                     &mCrop, exif_data, exif_table_numEntries)) {
             LOGE("native_jpeg_encode: jpeg_encoder_encode failed.");
             return false;
         }
