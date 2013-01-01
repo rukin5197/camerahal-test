@@ -416,13 +416,6 @@ void CameraHAL_FixupParams(android::CameraParameters &camParams)
                       fps_supported_ranges);
     }
 
-    /* Disable auto focus on TouchPad */
-    camParams.set(CameraParameters::KEY_SUPPORTED_FOCUS_MODES,
-                  CameraParameters::FOCUS_MODE_INFINITY);
-
-    camParams.set(CameraParameters::KEY_FOCUS_MODE,
-                  CameraParameters::FOCUS_MODE_INFINITY);
-
     camParams.set(android::CameraParameters::KEY_MAX_SHARPNESS, "30");
     camParams.set(android::CameraParameters::KEY_MAX_CONTRAST, "10");
     camParams.set(android::CameraParameters::KEY_MAX_SATURATION, "10");
