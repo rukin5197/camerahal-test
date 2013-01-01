@@ -85,7 +85,7 @@ extern "C" {
 // Number of video buffers held by kernal (initially 1,2 &3)
 #define ACTIVE_VIDEO_BUFFERS 3
 
-#define APP_ORIENTATION 90
+#define APP_ORIENTATION 0
 
 #if DLOPEN_LIBMMCAMERA
 #include <dlfcn.h>
