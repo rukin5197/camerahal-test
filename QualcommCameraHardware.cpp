@@ -626,82 +626,6 @@ static const str_map scenedetect[] = {
     { CameraParameters::SCENE_DETECT_ON, TRUE },
 };
 
-static void dump_dimensions(cam_ctrl_dimension_t *t)
-{
-#define PRINT_VAL(_name) LOGV("\t" #_name ": %u", t->_name)
-    LOGV("Dimensions dump:");
-    PRINT_VAL(video_width);
-    PRINT_VAL(video_height);
-    PRINT_VAL(picture_width);
-    PRINT_VAL(picture_height);
-    PRINT_VAL(display_width);
-    PRINT_VAL(display_height);
-    PRINT_VAL(orig_video_width);
-    PRINT_VAL(orig_video_height);
-    PRINT_VAL(orig_picture_dx);
-    PRINT_VAL(orig_picture_dy);
-    PRINT_VAL(ui_thumbnail_height);
-    PRINT_VAL(ui_thumbnail_width);
-    PRINT_VAL(thumbnail_height);
-    PRINT_VAL(thumbnail_width);
-#if 0
-    PRINT_VAL(orig_picture_width);
-    PRINT_VAL(orig_picture_height);
-    PRINT_VAL(orig_thumb_width);
-    PRINT_VAL(orig_thumb_height);
-#endif
-    PRINT_VAL(raw_picture_height);
-    PRINT_VAL(raw_picture_width);
-#ifdef RDI_SUPPORT
-    PRINT_VAL(rdi0_height);
-    PRINT_VAL(rdi0_width);
-    PRINT_VAL(rdi1_height);
-    PRINT_VAL(rdi1_width);
-#endif
-    PRINT_VAL(hjr_xtra_buff_for_bayer_filtering);
-    PRINT_VAL(prev_format);
-    PRINT_VAL(enc_format);
-    PRINT_VAL(thumb_format);
-    PRINT_VAL(main_img_format);
-#ifdef RDI_SUPPORT
-    PRINT_VAL(rdi0_format);
-    PRINT_VAL(rdi1_format);
-#endif
-    PRINT_VAL(prev_padding_format);
-#if 0
-    PRINT_VAL(enc_padding_format);
-    PRINT_VAL(thumb_padding_format);
-    PRINT_VAL(main_padding_format);
-#endif
-    PRINT_VAL(display_luma_width);
-    PRINT_VAL(display_luma_height);
-    PRINT_VAL(display_chroma_width);
-    PRINT_VAL(display_chroma_height);
-    PRINT_VAL(video_luma_width);
-    PRINT_VAL(video_luma_height);
-    PRINT_VAL(video_chroma_width);
-    PRINT_VAL(video_chroma_height);
-    PRINT_VAL(thumbnail_luma_width);
-    PRINT_VAL(thumbnail_luma_height);
-    PRINT_VAL(thumbnail_chroma_width);
-    PRINT_VAL(thumbnail_chroma_height);
-    PRINT_VAL(main_img_luma_width);
-    PRINT_VAL(main_img_luma_height);
-    PRINT_VAL(main_img_chroma_width);
-    PRINT_VAL(main_img_chroma_height);
-#if 0
-    LOGV("\trotation: %u\n", t->rotation);
-    PRINT_VAL(display_frame_offset);
-    PRINT_VAL(video_frame_offset);
-    PRINT_VAL(picture_frame_offset);
-    PRINT_VAL(thumb_frame_offset);
-#endif
-#ifdef RDI_SUPPORT
-    PRINT_VAL(channel_interface_mask);
-#endif
-
-}
-
 #define country_number (sizeof(country_numeric) / sizeof(country_map))
 /* TODO : setting dummy values as of now, need to query for correct
  * values from sensor in future
@@ -2675,23 +2599,12 @@ bool QualcommCameraHardware::native_set_parm(
     LOGV("%s: fd %d, type %d, length %d", __FUNCTION__,
          mCameraControlFd, type, length);
 
-    if (type == 1) {
-        cam_ctrl_dimension_t *t = (cam_ctrl_dimension_t *)value;
-        LOGV("Before calling ioctl");
-        dump_dimensions(t);
-    }
-
     if (ioctl(mCameraControlFd, MSM_CAM_IOCTL_CTRL_COMMAND, &ctrlCmd) < 0 ||
                 ctrlCmd.status != CAM_CTRL_SUCCESS) {
         LOGE("%s: error (%s): fd %d, type %d, length %d, status %d",
              __FUNCTION__, strerror(errno),
              mCameraControlFd, type, length, ctrlCmd.status);
         return false;
-    }
-    if (type == 1) {
-        cam_ctrl_dimension_t *t = (cam_ctrl_dimension_t *)value;
-        LOGV("After calling ioctl");
-        dump_dimensions(t);
     }
     return true;
 }
