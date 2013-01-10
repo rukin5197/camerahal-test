@@ -165,8 +165,8 @@ typedef struct {
   int8_t camera_id;
   cam_position_t position;
   uint32_t sensor_mount_angle;
-  //uint32_t sensor_Orientation;
-  //struct fih_parameters_data parameters_data;
+  uint32_t sensor_Orientation;
+  struct fih_parameters_data parameters_data;
 } camera_info_t;
 
 typedef struct {
@@ -333,6 +333,8 @@ typedef enum {
     CAMERA_PARM_PREVIEW_SIZE, /*35*/
     CAMERA_PARM_QUERY_FALSH4SNAP,
     CAMERA_PARM_FOCUS_DISTANCES,
+    CAMERA_PARM_FOCUS_STATE,
+    CAMERA_PARM_FOCUS_RESULT,
     CAMERA_PARM_BUFFER_INFO,
     CAMERA_PARM_JPEG_ROTATION,
     CAMERA_PARM_JPEG_MAINIMG_QUALITY, /* 40 */
@@ -500,6 +502,11 @@ typedef enum {
   CAMERA_GET_PARM_3D_FRAME_FORMAT,
   CAMERA_QUERY_FLASH_FOR_SNAPSHOT,
   CAMERA_GET_PARM_FOCUS_DISTANCES,
+  CAMERA_SET_PARM_SCENE_MODE,
+  CAMERA_SET_PARM_RESET,
+  CAMERA_SET_MIRROR,
+  CAMERA_GET_AFSTATE,
+  CAMERA_GET_AFRESULT,
   CAMERA_START_ZSL,
   CAMERA_STOP_ZSL,
   CAMERA_ENABLE_ZSL, /* 80 */
